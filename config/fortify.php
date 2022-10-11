@@ -61,7 +61,18 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    //'home' => RouteServiceProvider::HOME,
+    'home' => function() {
+      if(Auth::user() !== null){
+        if(Auth::user()->is_admin == 1){
+          return '/admin/dashboard';
+        } else {
+          return '/';
+        }
+      } else {
+        return '/login';
+      }
+    },
 
     /*
     |--------------------------------------------------------------------------
