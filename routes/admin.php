@@ -10,3 +10,6 @@ Route::get('/login', 'App\Http\Controllers\Admin\AdminLoginController@showLoginF
 Route::post('/login', 'App\Http\Controllers\Admin\AdminLoginController@login')->name('login.submit');
 Route::get('logout/', 'App\Http\Controllers\Admin\AdminLoginController@logout')->name('logout');
 Route::get('/',  'App\Http\Controllers\Admin\DashboardController@dashboard')->name('dashboard');
+
+Route::resource('users',    'App\Http\Controllers\Admin\UserController');
+Route::resource('admins',   'App\Http\Controllers\Admin\AdminController');
