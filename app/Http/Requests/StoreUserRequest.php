@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAdminRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
-    protected $redirectRoute = 'admin.admins.create';
+    protected $redirectRoute = 'admin.users.create';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +28,6 @@ class StoreAdminRequest extends FormRequest
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'type' => 'required'
         ];
     }
 }

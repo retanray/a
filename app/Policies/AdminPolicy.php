@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
-//use App\Models\Admin;
+use App\Models\Admin;
 //use App\Models\User;
 use App\Models\UserInterface;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class AdminPolicy
 {
@@ -17,11 +18,13 @@ class AdminPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(UserInterface $user)
+    public function viewAny(UserInterface $admin)
     {
-        if($user->isAccessibleAdmins()) {
-          return true;
+        if ($admin->isAccessibleAdmins()) {
+            //            return true;
+            return Response::allow();
         }
+        return Response::deny('You Are Not Allowed to Access This Page.' , 403);
     }
 
     /**
@@ -31,9 +34,13 @@ class AdminPolicy
      * @param  \App\Models\Admin  $dmin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(UserInterface $user, Admin $createdAdmin)
+    public function view(UserInterface $admin, Admin $createdAdmin)
     {
-        
+        if ($admin->isAccessibleAdmins()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('Sorry, You Are Not Allowed to Access This Page.' , 403);
     }
 
     /**
@@ -42,9 +49,13 @@ class AdminPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(UserInterface $user)
+    public function create(UserInterface $admin)
     {
-        //
+        if ($admin->isAccessibleAdmins()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('Sorry, You Are Not Allowed to Access This Page.');
     }
 
     /**
@@ -54,9 +65,13 @@ class AdminPolicy
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(UserInterface $user, Admin $createdAdmin)
+    public function update(UserInterface $admin, Admin $createdAdmin)
     {
-        //
+        if ($admin->isAccessibleAdmins()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('You Are Not Allowed to Access This Page.');
     }
 
     /**
@@ -66,9 +81,13 @@ class AdminPolicy
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(UserInterface $user, Admin $createdAdmin)
+    public function delete(UserInterface $admin, Admin $createdAdmin)
     {
-        //
+        if ($admin->isAccessibleAdmins()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('You Are Not Allowed to Access This Page.');
     }
 
     /**
@@ -78,7 +97,7 @@ class AdminPolicy
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(UserInterface $user, Admin $createdAdmin)
+    public function restore(UserInterface $admin, Admin $createdAdmin)
     {
         //
     }
@@ -90,7 +109,7 @@ class AdminPolicy
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(UserInterface $user, Admin $createdAdmin)
+    public function forceDelete(UserInterface $admin, Admin $createdAdmin)
     {
         //
     }

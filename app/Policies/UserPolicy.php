@@ -2,9 +2,10 @@
 
 namespace App\Policies;
 
-//use App\Models\Admin;
+use App\Models\User;
 use App\Models\UserInterface;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
@@ -32,6 +33,11 @@ class UserPolicy
      */
     public function view(UserInterface $user, Admin $createdAdmin)
     {
+        if ($admin->isAccessibleUsers()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('You do not permitted this page.' , 403);
         // //
         // return $admin->id === $createdAdmin->user_id
         //             ? Response::allow()
@@ -46,7 +52,11 @@ class UserPolicy
      */
     public function create(UserInterface  $user)
     {
-        //
+        if ($admin->isAccessibleUsers()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('You do not permitted this page.' , 403);
     }
 
     /**
@@ -58,7 +68,11 @@ class UserPolicy
      */
     public function update(UserInterface  $user, Admin $createdAdmin)
     {
-        //
+        if ($admin->isAccessibleUsers()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('You do not permitted this page.');
     }
 
     /**
@@ -70,7 +84,11 @@ class UserPolicy
      */
     public function delete(UserInterface  $user, Admin $createdAdmin)
     {
-        //
+        if ($admin->isAccessibleUsers()) {
+            //            return true;
+            return Response::allow();
+        }
+        return Response::deny('You do not permitted this page.');
     }
 
     /**

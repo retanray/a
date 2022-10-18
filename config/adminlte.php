@@ -400,6 +400,11 @@ return [
         'text'         => 'search',
       ],
       [
+          'text' => 'Dashboard',
+          'url'  => 'admin',
+          'icon' => 'fas fa-tachometer-alt',
+      ],
+      [
         'text'  => 'Users',
         'url'   => 'admin/users',
         'icon'  => 'fas fa-fw fa-user',

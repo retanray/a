@@ -17,6 +17,7 @@ class Admin extends Authenticatable implements UserInterface
       'name',
       'email',
       'password',
+      'type'
     ];
 
     protected $hidden = [

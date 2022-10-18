@@ -29,31 +29,58 @@ class UserController extends Controller
 
   public function create()
   {
-
+    return view(
+        "admin.users.create" ,
+        [
+        ]
+    );
   }
 
   public function store(StoreUserReqeust $request)
   {
+    $validated = $request->validated();
+    $validated['password'] = bcrypt($validated['password']);
 
+    $admin = User::create($validated);
+
+    return redirect('admin/users/')->with('success', 'User Created Successfully.');
   }
 
   public function show(User $user)
   {
-
+    return view(
+        "admin.users.show" ,
+        [
+            'model' => $user 
+        ]
+    );
   }
 
   public function edit(User $user)
   {
+    return view(
+        "admin.users.edit" ,
+        [
+            'model' => $user 
 
+        ]
+    );
   }
 
   public function update(UpdateUserRequest $request, User $user)
   {
+    $validated = $request->validated();
 
+    $user->name  = $request->name;
+    $user->email = $request->email;
+    $user->save();
+
+    return redirect('admin/users/'.$user->id)->with('success', 'User Updated Successfully.');
   }
 
-  public function destory(User $user)
+  public function destroy(User $user)
   {
-    
+    $user->delete();
+    return redirect('admin/users')->with('success', 'User Removed Successfully.');
   }
 }
